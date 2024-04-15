@@ -81,9 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         if (documentSnapshot.exists()) {
-                                            String userName = documentSnapshot.getString("username");
+                                            String userName = documentSnapshot.getString("name");
                                             Toast.makeText(LoginActivity.this, "Welcome back, " + userName + "!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                            startActivity(new Intent(LoginActivity.this, MainMenu.class));
                                             finish();
                                         } else {
                                             Toast.makeText(LoginActivity.this, "User data not found", Toast.LENGTH_SHORT).show();
