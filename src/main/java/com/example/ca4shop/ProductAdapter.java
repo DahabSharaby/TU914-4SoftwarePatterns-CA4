@@ -87,7 +87,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
-    // Interface to handle item click events
     public interface OnProductClickListener {
         void onProductClick(Product product);
 

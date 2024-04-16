@@ -8,11 +8,10 @@ public class Review implements Parcelable {
     private String comment;
     private double rating;
 
-    // Default constructor
+
     public Review() {
     }
 
-    // Constructor
     public Review(String userId, String comment, double rating) {
         this.userId = userId;
         this.comment = comment;

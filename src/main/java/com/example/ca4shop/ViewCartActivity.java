@@ -28,28 +28,21 @@ public class ViewCartActivity extends AppCompatActivity {
         cartItemList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
 
-        // Set up RecyclerView
         cartAdapter = new CartAdapter(this, cartItemList);
         recyclerViewCart.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCart.setAdapter(cartAdapter);
 
-        // Retrieve products from Firestore
-        retrieveProducts();
+        retrieveProductsFromIntent();
     }
 
-    private void retrieveProducts() {
-        // Assuming you have a collection named "products" in Firestore
-        db.collection("products")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (Product product : queryDocumentSnapshots.toObjects(Product.class)) {
-                        cartItemList.add(product);
-                    }
-                    // Notify the adapter that data has changed
-                    cartAdapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(ViewCartActivity.this, "Failed to retrieve products: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
+    private void retrieveProductsFromIntent() {
+        if (getIntent() != null && getIntent().hasExtra("product_details")) {
+            Product product = getIntent().getParcelableExtra("product_details");
+
+            cartItemList.add(product);
+            cartAdapter.notifyDataSetChanged();
+        }
     }
 }
+
+

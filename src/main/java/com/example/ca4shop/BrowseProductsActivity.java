@@ -17,7 +17,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class BrowseProductsActivity extends AppCompatActivity implements ProductAdapter.OnProductClickListener {
 
     private RecyclerView recyclerView;
@@ -75,6 +74,7 @@ public class BrowseProductsActivity extends AppCompatActivity implements Product
                             filteredList.addAll(productList);
                             productAdapter.notifyDataSetChanged();
                         } else {
+                            Toast.makeText(BrowseProductsActivity.this, "Failed to fetch products", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -93,7 +93,10 @@ public class BrowseProductsActivity extends AppCompatActivity implements Product
 
     @Override
     public void onProductClick(Product product) {
-        Toast.makeText(this, "Product added to cart: " + product.getName(), Toast.LENGTH_SHORT).show();
+        // Pass the details of the clicked product to the shopping cart activity
+        Intent intent = new Intent(this, ViewCartActivity.class);
+        intent.putExtra("product_details", product); // Pass the product object
+        startActivity(intent);
     }
 
     @Override
@@ -101,11 +104,11 @@ public class BrowseProductsActivity extends AppCompatActivity implements Product
         Product product = filteredList.get(position);
         Toast.makeText(this, "Product rated: " + product.getName() + ", Rating: " + rating, Toast.LENGTH_SHORT).show();
     }
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainMenu.class);
         startActivity(intent);
         finish();
     }
-
 }
