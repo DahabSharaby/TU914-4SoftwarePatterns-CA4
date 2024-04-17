@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +21,7 @@ public class ViewCartActivity extends AppCompatActivity {
     private CartAdapter cartAdapter;
     private List<Product> cartItemList;
     private FirebaseFirestore db;
+    private Button checkoutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,14 @@ public class ViewCartActivity extends AppCompatActivity {
         recyclerViewCart.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewCart.setAdapter(cartAdapter);
 
+        checkoutButton = findViewById(R.id.checkoutButton);
+        checkoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkout();
+            }
+        });
+
         retrieveProductsFromIntent();
     }
 
@@ -43,6 +55,11 @@ public class ViewCartActivity extends AppCompatActivity {
             cartAdapter.notifyDataSetChanged();
         }
     }
+
+    private void checkout() {
+
+        Intent intent = new Intent(this, CheckoutActivity.class);
+        intent.putParcelableArrayListExtra("cart_items", new ArrayList<>(cartItemList));
+        startActivity(intent);
+    }
 }
-
-

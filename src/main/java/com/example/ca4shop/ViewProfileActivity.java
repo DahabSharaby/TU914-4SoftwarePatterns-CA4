@@ -46,17 +46,15 @@ public class ViewProfileActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            // Display user email
             userEmailTextView.setText(currentUser.getEmail());
 
-            // Fetch and display user information if available
             DocumentReference userRef = db.collection("users").document(currentUser.getUid());
             userRef.get().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Map<String, Object> userData = task.getResult().getData();
                     if (userData != null) {
                         userNameEditText.setText((String) userData.get("name"));
-                        userPhoneNumberEditText.setText((String) userData.get("phoneNumber")); // Set phone number
+                        userPhoneNumberEditText.setText((String) userData.get("phoneNumber"));
                         userCityEditText.setText((String) userData.get("city"));
                     }
                 } else {
@@ -79,7 +77,6 @@ public class ViewProfileActivity extends AppCompatActivity {
         String newCity = userCityEditText.getText().toString().trim();
         String newPassword = userPasswordEditText.getText().toString().trim();
 
-        // Update user information in Firestore
         if (currentUser != null) {
             DocumentReference userRef = db.collection("users").document(currentUser.getUid());
             Map<String, Object> updates = new HashMap<>();
@@ -87,9 +84,7 @@ public class ViewProfileActivity extends AppCompatActivity {
             updates.put("phoneNumber", newPhoneNumber);
             updates.put("city", newCity);
 
-            // Check if password is to be updated
             if (!TextUtils.isEmpty(newPassword)) {
-                // Update password
                 currentUser.updatePassword(newPassword)
                         .addOnSuccessListener(aVoid -> {
                             Toast.makeText(ViewProfileActivity.this, "Password updated successfully", Toast.LENGTH_SHORT).show();
@@ -99,7 +94,6 @@ public class ViewProfileActivity extends AppCompatActivity {
                         });
             }
 
-            // Update other user information
             userRef.update(updates)
                     .addOnSuccessListener(aVoid -> {
                         Toast.makeText(ViewProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
@@ -110,3 +104,4 @@ public class ViewProfileActivity extends AppCompatActivity {
         }
     }
 }
+

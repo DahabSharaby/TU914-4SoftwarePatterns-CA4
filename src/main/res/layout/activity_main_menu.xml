@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Product"
-        android:layout_below="@id/buttonViewProfile"
+        android:layout_below="@id/textViewWelcome"
         android:onClick="onAddProductClick" />
 
     <Button
@@ -26,7 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Browse Products"
-        android:layout_below="@id/textViewWelcome"
+        android:layout_below="@id/buttonAddProduct"
+        android:layout_marginTop="16dp"
         android:onClick="onBrowseProductsClick" />
 
     <Button
@@ -35,6 +36,7 @@
         android:layout_height="wrap_content"
         android:text="View Shopping Cart"
         android:layout_below="@id/buttonBrowseProducts"
+        android:layout_marginTop="16dp"
         android:onClick="onViewCartClick" />
 
     <Button
@@ -43,6 +45,16 @@
         android:layout_height="wrap_content"
         android:text="View Profile"
         android:layout_below="@id/buttonViewCart"
+        android:layout_marginTop="16dp"
         android:onClick="onViewProfileClick" />
+
+    <Button
+        android:id="@+id/AdminDashClick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Admin Dashboard"
+        android:layout_below="@id/buttonViewProfile"
+        android:layout_marginTop="16dp"
+        android:onClick="onAdminDashClick" />
 
 </RelativeLayout>

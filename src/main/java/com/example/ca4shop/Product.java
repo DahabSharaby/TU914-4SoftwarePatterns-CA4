@@ -13,11 +13,12 @@ public class Product implements Parcelable {
     private String imageURL;
     private float rating;
     private List<String> comments;
+    private int stockQuantity;
 
     public Product() {
     }
 
-    public Product(String name, String manufacturer, String price, String category, String imageURL, float rating, List<String> comments) {
+    public Product(String name, String manufacturer, String price, String category, String imageURL, float rating, List<String> comments, int stockQuantity) {
         this.name = name;
         this.manufacturer = manufacturer;
         this.price = price;
@@ -25,6 +26,7 @@ public class Product implements Parcelable {
         this.imageURL = imageURL;
         this.rating = rating;
         this.comments = comments;
+        this.stockQuantity = stockQuantity;
     }
 
     protected Product(Parcel in) {
@@ -35,6 +37,7 @@ public class Product implements Parcelable {
         imageURL = in.readString();
         rating = in.readFloat();
         comments = in.createStringArrayList();
+        stockQuantity = in.readInt();
     }
 
     public static final Creator<Product> CREATOR = new Creator<Product>() {
@@ -85,6 +88,14 @@ public class Product implements Parcelable {
         this.comments = comments;
     }
 
+    public int getStockQuantity() { // Added getter for stock quantity
+        return stockQuantity;
+    }
+
+    public void setStockQuantity(int stockQuantity) { // Added setter for stock quantity
+        this.stockQuantity = stockQuantity;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -99,5 +110,6 @@ public class Product implements Parcelable {
         dest.writeString(imageURL);
         dest.writeFloat(rating);
         dest.writeStringList(comments);
+        dest.writeInt(stockQuantity);
     }
 }

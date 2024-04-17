@@ -36,6 +36,14 @@
         android:hint="Category"
         android:inputType="text" />
 
+    <EditText
+        android:id="@+id/editTextStockQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Stock Quantity"
+        android:inputType="number" />
+
     <Button
         android:id="@+id/buttonAddImage"
         android:layout_width="match_parent"

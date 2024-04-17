@@ -31,7 +31,7 @@ public class AddProductActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    private EditText editTextProductName, editTextManufacturer, editTextPrice, editTextCategory;
+    private EditText editTextProductName, editTextManufacturer, editTextPrice, editTextCategory, editTextStockQuantity;
     private ImageView imageViewProduct;
     private Button buttonAddImage, buttonAddProduct;
 
@@ -49,6 +49,7 @@ public class AddProductActivity extends AppCompatActivity {
         editTextManufacturer = findViewById(R.id.editTextManufacturer);
         editTextPrice = findViewById(R.id.editTextPrice);
         editTextCategory = findViewById(R.id.editTextCategory);
+        editTextStockQuantity = findViewById(R.id.editTextStockQuantity);
         imageViewProduct = findViewById(R.id.imageViewProduct);
         buttonAddImage = findViewById(R.id.buttonAddImage);
         buttonAddProduct = findViewById(R.id.buttonAddProduct);
@@ -90,12 +91,14 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     private void uploadProduct() {
-        final String productName = editTextProductName.getText().toString().trim(); // Get product name
+        final String productName = editTextProductName.getText().toString().trim();
         final String manufacturer = editTextManufacturer.getText().toString().trim();
         final String price = editTextPrice.getText().toString().trim();
         final String category = editTextCategory.getText().toString().trim();
+        final String stockQuantity = editTextStockQuantity.getText().toString().trim();
 
-        if (TextUtils.isEmpty(productName) || TextUtils.isEmpty(manufacturer) || TextUtils.isEmpty(price) || TextUtils.isEmpty(category) || imageUri == null) {
+        if (TextUtils.isEmpty(productName) || TextUtils.isEmpty(manufacturer) || TextUtils.isEmpty(price)
+                || TextUtils.isEmpty(category) || TextUtils.isEmpty(stockQuantity) || imageUri == null) {
             Toast.makeText(this, "Please fill in all fields and select an image", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -112,10 +115,11 @@ public class AddProductActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 Map<String, Object> product = new HashMap<>();
-                                product.put("name", productName); // Add product name
+                                product.put("name", productName);
                                 product.put("manufacturer", manufacturer);
                                 product.put("price", price);
                                 product.put("category", category);
+                                product.put("stockQuantity", stockQuantity);
                                 product.put("imageURL", uri.toString());
 
                                 db.collection("products")

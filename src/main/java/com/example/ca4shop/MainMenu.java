@@ -12,10 +12,6 @@ public class MainMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
     }
-    public void onAddProductClick(View view) {
-        Intent intent = new Intent(this, AddProductActivity.class);
-        startActivity(intent);
-    }
 
     public void onBrowseProductsClick(View view) {
         Intent intent = new Intent(this, BrowseProductsActivity.class);
@@ -27,8 +23,19 @@ public class MainMenu extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onAddProductClick(View view) {
+        Intent intent = new Intent(this, AddProductActivity.class);
+        startActivity(intent);
+    }
+
+
     public void onViewProfileClick(View view) {
         Intent intent = new Intent(this, ViewProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void onAdminDashClick(View view) {
+        Intent intent = new Intent(this, AdminDashboardActivity.class);
         startActivity(intent);
     }
 }

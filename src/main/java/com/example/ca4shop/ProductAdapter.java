@@ -64,7 +64,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             priceTextView.setText(String.valueOf(product.getPrice()));
             categoryTextView.setText(product.getCategory());
 
-            // Load image using Glide
             if (!TextUtils.isEmpty(product.getImageURL())) {
                 Glide.with(itemView.getContext())
                         .load(product.getImageURL())
